@@ -17,6 +17,7 @@ shopt -s histappend
 
 # PATHs
 export PATH="$HOME/Downloads/apache-maven-3.9.10/bin:$PATH"
+export PATH="/usr/pgadmin4/bin:$PATH"
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
@@ -124,8 +125,14 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 
 ## TERMINAL WITH GIT BRANCH
 #PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\u@\h|\w|\[\e[38;5;232;48;5;41;1m\]${PS1_CMD1}\[\e[0m\]:'
-PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)';
+# Terminal with git branch and cd and hostname
+
+# adding storing history in shells
+HIST_COMMAND="history -a; history -n"
+PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null); history -a; history -c;history -r;'
+
 PS1='\n\[\e[38;5;40m\]\u\[\e[0m\]@\[\e[38;5;41m\]\h\[\e[0m\]|\[\e[30;48;5;192m\]\w\[\e[0m\]|\[\e[38;5;232;48;5;41;1m\]${PS1_CMD1}\[\e[0m\] : '
+
 fzf_open_dir() {
     # Use fzf to select a file
     local file
